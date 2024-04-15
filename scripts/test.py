@@ -1,5 +1,5 @@
 from lib import rpi_logger 
 
-rpi_logger.log_init()
+logf = rpi_logger.rpi_logger()
 
-rpi_logger.log_data()
+logf.log_data("octopus")
