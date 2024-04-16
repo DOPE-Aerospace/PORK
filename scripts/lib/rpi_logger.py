@@ -33,6 +33,4 @@ class rpi_logger:
             date=current_time.strftime('%Y-%m-%d')
             time_str=current_time.strftime('%H-%M-%S')
             csv_writer.writerow((obj_name,date,time_str))
-
-
-      
+            self.list.append((obj_name,date,time_str))
