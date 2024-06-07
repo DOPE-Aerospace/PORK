@@ -1,19 +1,19 @@
 import time
-from picamera2 import Picamera2, Preview
+from picamera2 import Picamera2
 
-def scatta_foto(filename):
-    camera = Picamera2()
-    #camera.resolution = (1024, 768)  # Imposta la risoluzione
-    #camera_config = camera.create_preview_configuration()
-    camera_config = camera.create_still_configuration(main={"size": (4608, 2592)})
-    camera.configure(camera_config)
-    camera.start_preview(Preview.NULL)
-    camera.start()
-    #camera.start_preview()  # Avvia l'anteprima
-    time.sleep(2)  # Attendi un paio di secondi per permettere alla fotocamera di regolare le impostazioni
-    camera.capture_file(filename)  # Scatta la foto
-    #camera.stop_preview()  # Ferma l'anteprima
-    camera.close()  # Chiudi la fotocamera
+def take_photo(filename):
+    picam2 = Picamera2()
+    camera_config = picam2.create_still_configuration(main={"size": (4608, 2592)})
+    picam2.configure(camera_config)
+    picam2.start()
+    picam2.capture_file(filename)  # Take the photo
+    picam2.close()  # Close the camera
 
-# Utilizzo
-scatta_foto('foto4.jpg')
+def take_photos_interval(filename_template, interval, num_photos):
+    for i in range(num_photos):
+        filename = filename_template.format(i)
+        take_photo(filename)
+        time.sleep(interval)
+
+# Usage: take a photo every 20 seconds, for a total of 5 photos
+take_photos_interval('frame_{}.jpg', 20, 5)
