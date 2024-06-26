@@ -1,6 +1,7 @@
 import time
 import os
 from picamera2 import Picamera2
+from libcamera import controls
 
 def check_counter_frames(frames_path):
     count = 0
@@ -16,6 +17,9 @@ def take_photos_interval(frames_path, filename_template, interval, num_photos, c
     camera_config = camera.create_still_configuration(main={"size": (4608, 2592)})
     camera.configure(camera_config)
     camera.start()
+    camera.set_controls({"AfMode" : controls.AfModeEnum.Auto})
+    print(f"Starting autofocus cycle...")
+    camera.autofocus_cycle()
     print(f"Starting frames acquisition...")
     for i in range(num_photos):
         filename = os.path.join(frames_path, filename_template.format(counter))
@@ -30,7 +34,7 @@ def main():
     # Usage:
     # 1) set variables
     interval = 2 # number of seconds between frames
-    num_photos = 3 # number of total frames taken 
+    num_photos = 5 # number of total frames taken 
     # 2) check the counter of the frames
     frames_path = os.path.join(os.getcwd(), "..", "frames")
     count = check_counter_frames(frames_path)
