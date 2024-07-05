@@ -17,11 +17,11 @@ def take_photos_interval(frames_path, filename_template, interval, num_photos, c
     camera_config = camera.create_still_configuration(main={"size": (4608, 2592)})
     camera.configure(camera_config)
     camera.start()
-    camera.set_controls({"AfMode" : controls.AfModeEnum.Auto})
-    print(f"Starting autofocus cycle...")
-    camera.autofocus_cycle()
     print(f"Starting frames acquisition...")
     for i in range(num_photos):
+        camera.set_controls({"AfMode" : controls.AfModeEnum.Auto})
+        print(f"Starting autofocus cycle...")
+        camera.autofocus_cycle()
         filename = os.path.join(frames_path, filename_template.format(counter))
         camera.capture_file(filename) # Take the photo
         print(f"frames_{counter}.jpg taken")
