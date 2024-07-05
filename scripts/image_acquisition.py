@@ -33,8 +33,8 @@ def take_photos_interval(frames_path, filename_template, interval, num_photos, c
 def main():
     # Usage:
     # 1) set variables
-    interval = 2 # number of seconds between frames
-    num_photos = 5 # number of total frames taken 
+    interval = 6 # number of seconds between frames
+    num_photos = 100 # number of total frames taken 
     # 2) check the counter of the frames
     frames_path = os.path.join(os.getcwd(), "..", "frames")
     count = check_counter_frames(frames_path)
