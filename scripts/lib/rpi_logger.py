@@ -10,6 +10,8 @@ class rpi_logger:
     '''
     def __init__(self):
         self.log_path = os.path.join(os.getcwd(), "..", "log")
+        if not os.path.isdir(self.log_path):
+            os.mkdir(self.log_path)
         self.list=[]
         count = 0
         while True:
