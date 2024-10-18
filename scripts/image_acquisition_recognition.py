@@ -58,7 +58,11 @@ def main ():
     while True:
         photo = Image.fromarray(camera.capture_array())
 
+        print("Photo acquired")
+
         detections = detector.detectObjectsFromImage(input_image = photo, minimum_percentage_probability=5)
+
+        print("Starting detection")
 
         for eachObject in detections:
             name = eachObject["name"]
@@ -72,6 +76,8 @@ def main ():
 
         cv2.imshow("Object Detection PI", photo)
         cv2.imwrite(f"frame_{counter}.jpg", photo)
+
+        print("New image in output folder")
 
         counter += 1
 
