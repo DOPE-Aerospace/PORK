@@ -60,9 +60,11 @@ def main ():
 
         print("Photo acquired")
 
+        print("Starting detection")
+        
         detections = detector.detectObjectsFromImage(input_image = photo, minimum_percentage_probability=5)
 
-        print("Starting detection")
+        print("Starting to show objects in picture")
 
         for eachObject in detections:
             name = eachObject["name"]
