@@ -4,6 +4,7 @@
 import os
 import cv2
 from PIL import Image
+from datetime import datetime
 
 # Custom libraries
 from lib import rpi_logger as rpi
@@ -58,13 +59,13 @@ def main ():
     while True:
         photo = Image.fromarray(camera.capture_array())
 
-        print("Photo acquired")
+        print(f"{datetime.now()} - Photo acquired") 
 
-        print("Starting detection")
+        print(f"{datetime.now()} - Starting detection")
         
         detections = detector.detectObjectsFromImage(input_image = photo, minimum_percentage_probability=5)
 
-        print("Starting to show objects in picture")
+        print(f"{datetime.now()} - Starting to show objects in picture")
 
         for eachObject in detections:
             name = eachObject["name"]
@@ -79,7 +80,7 @@ def main ():
         cv2.imshow("Object Detection PI", photo)
         cv2.imwrite(f"frame_{counter}.jpg", photo)
 
-        print("New image in output folder")
+        print(f"{datetime.now()} - New image in output folder")
 
         counter += 1
 
